@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+  <pnp:Preferences Author="Raytheon" Version="1.0" Generator="Raytheon">
+    <pnp:Parameters>
+      <pnp:Parameter Key="Business" Required="true" />
+      <pnp:Parameter Key="OwnerEmail" Required="true" />
+      <pnp:Parameter Key="SiteOwner1" Required="true" />
+      <pnp:Parameter Key="SiteOwner2" Required="true" />
+      <pnp:Parameter Key="Farm" Required="true" />
+      <pnp:Parameter Key="Environment" Required="true" />
+      <pnp:Parameter Key="RecordsAppHostURLInternal" Required="true" />
+      <pnp:Parameter Key="RTN-Template" Required="true"/>
+    </pnp:Parameters>
+  </pnp:Preferences>
+  <pnp:Templates ID="GeneralTemplates">
+
+    <!-- Defines the template -->
+    <pnp:ProvisioningTemplate ID="Collaboration" Version="1.0" DisplayName="Collaboration" Description="This is the collaboration template description.">
+
+      <!-- These entries will be placed in the root web's property bag -->
+      <pnp:PropertyBagEntries>
+        <pnp:PropertyBagEntry Key="rtn-template" Value="{parameter:RTN-Template}" Indexed="true" Overwrite="true" />
+        <pnp:PropertyBagEntry Key="rtn-lastscanned" Value="" Indexed="true" Overwrite="false" />
+        <pnp:PropertyBagEntry Key="Business" Value="{parameter:Business}" Indexed="true" Overwrite="false" />
+        <pnp:PropertyBagEntry Key="rtn-farm" Value="{parameter:Farm}" Indexed="true" Overwrite="false" />
+        <pnp:PropertyBagEntry Key="rtn-environment" Value="{parameter:Environment}" Indexed="true" Overwrite="false" />
+      </pnp:PropertyBagEntries>
+      <!-- Controls publishing level settings -->
+      <pnp:Publishing AutoCheckRequirements="MakeCompliant">
+        <pnp:AvailableWebTemplates>
+          <pnp:WebTemplate TemplateName="PROJECTSITE#0" />
+        </pnp:AvailableWebTemplates>
+      </pnp:Publishing>
+      <!-- Determines what features are required to be activated at the site collection and web level -->
+      <pnp:Features>
+        <pnp:SiteFeatures>
+          <pnp:Feature ID="da2e115b-07e4-49d9-bb2c-35e93bb9fca9" Description="In Place Records Management" />
+          <pnp:Feature ID="f6924d36-2fa8-4f0b-b16d-06b7250180fa" Description="Site Publishing" />
+          <pnp:Feature ID="c845ed8d-9ce5-448c-bd3e-ea71350ce45b" Description="SharePoint 2007 Workflows" />
+          <pnp:Feature ID="0af5989a-3aea-4519-8ab0-85d91abe39ff" Description="Workflows" />
+          <pnp:Feature ID="3bae86a2-776d-499d-9db8-fa4cdc7884f8" Description="Document Sets" />
+        </pnp:SiteFeatures>
+        <pnp:WebFeatures>
+          <pnp:Feature ID="94c94ca6-b32f-4da9-a9e3-1f3d343d7ecb" Description="Web Publishing" />
+          <pnp:Feature ID="a7a2793e-67cd-4dc1-9fd0-43f61581207a" Description="Following Content" />
+          <pnp:Feature ID="7201d6a4-a5d3-49a1-8c19-19c4bac6e668" Description="Metadata Navigation and Filtering" />
+          <pnp:Feature ID="87294c72-f260-42f3-a41b-981a2ffce37a" Description="Minimal Download Strategy" Deactivate="true" />
+          <pnp:Feature ID="15a572c6-e545-4d32-897a-bab6f5846e18" Description="Site Feed" Deactivate="true" />
+          <pnp:Feature ID="d2b9ec23-526b-42c5-87b6-852bd83e0364" Description="Access App" Deactivate="true" />
+        </pnp:WebFeatures>
+      </pnp:Features>
+      <!-- Defines custom actions to install for this site collection -->
+      <pnp:CustomActions>
+        <pnp:SiteCustomActions>
+          <pnp:CustomAction Name="RaytheonDeclareRecordCustomAction" Enabled="true" Location="CommandUI.Ribbon" Sequence="10001" Rights="3">
+            <pnp:CommandUIExtension>
+              <CommandUIDefinitions>
+                <CommandUIDefinition Location="Ribbon.Documents.New.Controls._children">
+                  <Button Id="Ribbon.Documents.New.DeclareRecordButton"
+                          Alt="Declare Record"
+                          Sequence="100"
+                          Command="Invoke_DeclareRecordButtonRequest"
+                          LabelText="Declare Record"
+                          TemplateAlias="o1"
+                          ToolTipTitle="Declare Record(s)"
+                          ToolTipDescription="Declare the selected document(s) as a Record by filling in various required fields, selecting an appropriate Work Product, and optionally providing keywords to help find the document in the future."
+                          Image32by32="_layouts/15/images/declarerecorditemhh.png"
+                          Image16by16="_layouts/15/images/declarerecorditemhs.png"
+                  />
+                </CommandUIDefinition>
+              </CommandUIDefinitions>
+              <CommandUIHandlers>
+                <CommandUIHandler Command="Invoke_DeclareRecordButtonRequest"
+                                  EnabledScript="javascript:SP.ListOperation.Selection.getSelectedItems().length > 0;"
+                                  CommandAction="javascript:
+                                  var url = '{parameter:RecordsAppHostURLInternal}/Record/DeclareRecordInit?SPHostUrl={SiteUrl}&amp;SPAppWebUrl={AppWebUrl}&amp;SPLanguage={Language}&amp;SPClientTag={ClientTag}&amp;SPProductNumber={ProductNumber}&amp;SelectedListID={SelectedListId}&amp;SelectedItemID={SelectedItemId}';
+                                  SetupAndOpenDialogForCustomAction(url, 800, 650, ' ');" />
+              </CommandUIHandlers>
+            </pnp:CommandUIExtension>
+          </pnp:CustomAction>
+          <pnp:CustomAction Name="RaytheonUpdateRecordMetadataCustomAction" Enabled="true" Location="CommandUI.Ribbon" Sequence="10001" Rights="3">
+            <pnp:CommandUIExtension>
+              <CommandUIDefinitions>
+                <CommandUIDefinition Location="Ribbon.Documents.New.Controls._children">
+                  <Button Id="Ribbon.Documents.New.UpdateRecordMetadataButton"
+                          Alt="Update Record Metadata"
+                          Sequence="101"
+                          Command="Invoke_UpdateRecordMetadataButtonRequest"
+                          LabelText="Update Record Metadata"
+                          TemplateAlias="o1"
+                          ToolTipTitle="Update Record Metadata"
+                          ToolTipDescription="Update Metadata for selected document(s)."
+                          Image32by32="data:image/png;base64,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"
+                          Image16by16="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAACAElEQVQ4T6WSQWgTQRSG/4Tag1HUVpFWil20SCnJQbB48WBzUIMXBQ8aggc9em+1V6GePKgXQU9aC3pSqQhiDyoKQi/GQLWFIFjt2jQNyWYn2dl1fW86m2zI3vzg7b6Z2f+fN2825hP4D1oGL99/UxNhXNeFlBLScTB6aABHR4f0Sgg2YF68W9JZJ0LHl69r/uSDT35met5//Pa7WmPi2gee5+msm15+bFep4snCss6AlgGXGwWL50gwu1BEdmIESaNPRUCPfsOls0bB4mDHWXpnJwzAVkNFVwUNHX8pWBAuN2n0Y9B+juTYfj0TMpBuu4Kg7LD4EpXfm7+B9ZUPuD9zWc+GK9BHYHGhaCJf3FBjhsXjh/fC7LsC4ScgLFOvRByhQMKph4vIHjdUs1h8kaLpbN1SIrETpWq7Ca0f6d6j17iWO91x7ukzuyB+51UeEIek/mzDvoMjSB1Lt28hgMW8a4p2/7P4DOlTw9T1CoRwUbZcHOjfQQYbuHX7TrTB/M0MHOmhLiRWubH1Evxfr3B3bgVLq01M5VIY2i3JsKa+7zLgowQMx6gvrgPHKuPsCQPGjxqMwR40ShVYdl1902Ewnrmqsy2uXzhC5Zuwqg1sij0YGwDWf67RuAbH4z8l1MQolguf8fHNU5TLJirVTdhUtt0UiMVjSJ88j3O5SfwDDs8X4MVvprwAAAAASUVORK5CYII=" />
+                </CommandUIDefinition>
+              </CommandUIDefinitions>
+              <CommandUIHandlers>
+                <CommandUIHandler Command="Invoke_UpdateRecordMetadataButtonRequest"
+                                  EnabledScript="javascript:SP.ListOperation.Selection.getSelectedItems().length > 0;"
+                                  CommandAction="javascript:
+                                  var url = '{parameter:RecordsAppHostURLInternal}/Record/UpdateRecordInit?SPHostUrl={SiteUrl}&amp;SPAppWebUrl={AppWebUrl}&amp;SPLanguage={Language}&amp;SPClientTag={ClientTag}&amp;SPProductNumber={ProductNumber}&amp;SelectedListID={SelectedListId}&amp;SelectedItemID={SelectedItemId}';
+                                  SetupAndOpenDialogForCustomAction(url, 800, 650, ' ');" />
+              </CommandUIHandlers>
+            </pnp:CommandUIExtension>
+          </pnp:CustomAction>
+          <pnp:CustomAction Name="RaytheonNonRecordCustomAction" Enabled="true" Location="CommandUI.Ribbon" Sequence="10001" Rights="3">
+            <pnp:CommandUIExtension>
+              <CommandUIDefinitions>
+                <CommandUIDefinition Location="Ribbon.Documents.Manage.Controls._children">
+                  <Button Id="Ribbon.Documents.Manage.NonRecordButton"
+                          Alt="Non Record"
+                          Sequence="100"
+                          Command="Invoke_NonRecordButtonRequest"
+                          LabelText="Non Record"
+                          TemplateAlias="o1"
+                          ToolTipTitle="Non Record"
+                          ToolTipDescription="Set the WorkProduct for selected document(s) to be 'Non Record'."
+                          Image32by32="_layouts/15/images/NewContentPageHH.png"
+                          Image16by16="_layouts/15/images/NewContentPageHS.png"
+                  />
+                </CommandUIDefinition>
+              </CommandUIDefinitions>
+              <CommandUIHandlers>
+                <CommandUIHandler Command="Invoke_NonRecordButtonRequest"
+                                  EnabledScript="javascript:SP.ListOperation.Selection.getSelectedItems().length > 0;"
+                                  CommandAction="javascript:
+                                  var url = '{parameter:RecordsAppHostURLInternal}/NonRecord/NonRecordInit?SPHostUrl={SiteUrl}&amp;SPAppWebUrl={AppWebUrl}&amp;SPLanguage={Language}&amp;SPClientTag={ClientTag}&amp;SPProductNumber={ProductNumber}&amp;SelectedListID={SelectedListId}&amp;SelectedItemID={SelectedItemId}';
+                                  SetupAndOpenDialogForCustomAction(url, 800, 650, ' ');" />
+              </CommandUIHandlers>
+            </pnp:CommandUIExtension>
+          </pnp:CustomAction>
+          <pnp:CustomAction Name="RaytheonDeleteRecordCustomAction" Enabled="true" Location="CommandUI.Ribbon" Sequence="10001" Rights="3">
+            <pnp:CommandUIExtension>
+              <CommandUIDefinitions>
+                <CommandUIDefinition Location="Ribbon.Documents.Manage.Controls._children">
+                  <Button Id="Ribbon.Documents.Manage.DeleteRecordButton"
+                          Alt="Delete Record"
+                          Sequence="110"
+                          Command="Invoke_DeleteRecordButtonRequest"
+                          LabelText="Delete Record"
+                          TemplateAlias="o1"
+                          ToolTipTitle="Delete Record(s)"
+                          ToolTipDescription="Request that the selected Record(s) be deleted."
+                          Image32by32="_layouts/15/images/declarerecorditemhh.png"
+                          Image16by16="_layouts/15/images/declarerecorditemhs.png"
+                  />
+                </CommandUIDefinition>
+              </CommandUIDefinitions>
+              <CommandUIHandlers>
+                <CommandUIHandler Command="Invoke_DeleteRecordButtonRequest"
+                                  EnabledScript="javascript:SP.ListOperation.Selection.getSelectedItems().length > 0;"
+                                  CommandAction="javascript:
+                                  var url = '{parameter:RecordsAppHostURLInternal}/DeleteRecord/DeleteRecordInit?SPHostUrl={SiteUrl}&amp;SPAppWebUrl={AppWebUrl}&amp;SPLanguage={Language}&amp;SPClientTag={ClientTag}&amp;SPProductNumber={ProductNumber}&amp;SelectedListID={SelectedListId}&amp;SelectedItemID={SelectedItemId}';
+                                  SetupAndOpenDialogForCustomAction(url, 800, 650, ' ');" />
+              </CommandUIHandlers>
+            </pnp:CommandUIExtension>
+          </pnp:CustomAction>
+          <pnp:CustomAction Name="RaytheonSiteRecordReportCustomAction" Enabled="true" Location="CommandUI.Ribbon" Sequence="10001" Rights="31">
+            <pnp:CommandUIExtension>
+              <CommandUIDefinitions>
+                <CommandUIDefinition Location="Ribbon.Templates._children">
+                  <GroupTemplate Id="Ribbon.Templates.NewGroupInExistingTab.OneLargeExample">
+                    <Layout Title="NewGroupInExistingTabOneLarge" LayoutTitle="NewGroupInExistingTabOneLarge">
+                      <Section Alignment="Top" Type="OneRow">
+                        <Row>
+                          <ControlRef DisplayMode="Large" TemplateAlias="o1" />
+                        </Row>
+                      </Section>
+                    </Layout>
+                  </GroupTemplate>
+                </CommandUIDefinition>
+                <CommandUIDefinition Location="Ribbon.Documents.Scaling._children">
+                  <MaxSize
+                      Id="Ribbon.Documents.RecordsReportsGroup.MaxSize"
+                      Sequence="90"
+                      GroupId="Ribbon.Documents.RecordsReportsGroup"
+                      Size="NewGroupInExistingTabOneLarge" />
+                </CommandUIDefinition>
+                <CommandUIDefinition Location="Ribbon.Documents.Groups._children">
+                  <Group
+                      Id="Ribbon.Documents.RecordsReportsGroup"
+                      Sequence="90"
+                      Description="Record App Reports"
+                      Title="Reports"
+                      Template="Ribbon.Templates.NewGroupInExistingTab.OneLargeExample">
+                    <Controls Id="Ribbon.Documents.RecordsReportsGroup.Controls">
+                      <Button
+                          Id="Ribbon.Documents.RecordsReportsGroup.SiteRecordReportButton"
+                          Alt="Site Record Report"
+                          Command="Invoke_SiteRecordReportButtonRequest"
+                          Sequence="1"
+                          Image16by16="_layouts/15/images/doc_sp16.gif"
+                          Image32by32="_layouts/15/images/lg_newreport_sp.gif"
+                          Description="Record App Reports"
+                          LabelText="Site Record Report"
+                          TemplateAlias="o1" />
+                    </Controls>
+                  </Group>
+                </CommandUIDefinition>
+              </CommandUIDefinitions>
+              <CommandUIHandlers>
+                <CommandUIHandler Command="Invoke_SiteRecordReportButtonRequest"
+                                  CommandAction="javascript: window.open('{parameter:RecordsAppHostURLInternal}/reports/SiteCollectionReport.aspx?SPHostUrl={SiteUrl}');"
+                          />
+              </CommandUIHandlers>
+            </pnp:CommandUIExtension>
+          </pnp:CustomAction>
+        </pnp:SiteCustomActions>
+      </pnp:CustomActions>
+    </pnp:ProvisioningTemplate>
+  </pnp:Templates>
+</pnp:Provisioning>

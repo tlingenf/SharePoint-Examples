@@ -206,6 +206,9 @@
     <Compile Include="ProvisioningHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Collaboration.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="config.user">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

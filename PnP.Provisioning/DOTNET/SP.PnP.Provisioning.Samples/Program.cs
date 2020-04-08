@@ -3,6 +3,7 @@ using OfficeDevPnP.Core.Framework.Provisioning.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -39,9 +40,12 @@ namespace SP.PnP.Templates
             Uri sourceUri = new Uri(sourceSiteUrl);
             AuthenticationResult auth = await app.AcquireTokenForClient(new string[] { $"https://{sourceUri.Host}/.default" }).ExecuteAsync();
 
-            string resourceFolder;
-            ProvisioningTemplate template = ProvisioningHelper.GetProvisioningTemplate(sourceSiteUrl, auth.AccessToken, out resourceFolder);
-            ProvisioningHelper.ApplyProvisioningTemplate(destSiteUrl, template, resourceFolder, auth.AccessToken);
+            string templateString = System.IO.File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Collaboration.xml"));
+            ProvisioningHelper.ApplyProvisioningTemplate(destSiteUrl, templateString, null, auth.AccessToken);
+
+            //string resourceFolder;
+            //ProvisioningTemplate template = ProvisioningHelper.GetProvisioningTemplate(sourceSiteUrl, auth.AccessToken, out resourceFolder);
+            //ProvisioningHelper.ApplyProvisioningTemplate(destSiteUrl, template, resourceFolder, auth.AccessToken);
         }
     }
 }
