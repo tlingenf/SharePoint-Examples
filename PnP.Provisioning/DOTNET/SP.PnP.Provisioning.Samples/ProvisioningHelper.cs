@@ -3,6 +3,7 @@ using OfficeDevPnP.Core;
 using OfficeDevPnP.Core.Framework.Provisioning.Connectors;
 using OfficeDevPnP.Core.Framework.Provisioning.Model;
 using OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers;
+using OfficeDevPnP.Core.Framework.Provisioning.Providers;
 using OfficeDevPnP.Core.Framework.Provisioning.Providers.Xml;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,41 @@ namespace SP.PnP.Templates
 
                 return template;
             }
+        }
+
+        public static void ApplyProvisioningTemplate(string webUrl, string templateString, string resourcePath, string authToken)
+        {
+            ProvisioningTemplate template = LoadProvisioningTemplateFromString(templateString, null, (e) => { });
+            ApplyProvisioningTemplate(webUrl, template, resourcePath, authToken);
+        }
+
+        public static ProvisioningTemplate LoadProvisioningTemplateFromString(string xml, ITemplateProviderExtension[] templateProviderExtensions, Action<Exception> exceptionHandler)
+        {
+            var formatter = new XMLPnPSchemaFormatter();
+
+            XMLTemplateProvider provider = new XMLStreamTemplateProvider();
+
+            try
+            {
+                using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(xml)))
+                {
+                    return provider.GetTemplate(stream, templateProviderExtensions);
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                if (ex.InnerException is AggregateException)
+                {
+                    if (exceptionHandler != null)
+                    {
+                        foreach (var exception in ((AggregateException)ex.InnerException).InnerExceptions)
+                        {
+                            exceptionHandler(exception);
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         public static void ApplyProvisioningTemplate(string webUrl, ProvisioningTemplate template, string resourcePath, string authToken)
