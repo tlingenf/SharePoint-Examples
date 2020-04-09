@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Receivers ListTemplateId="101">
+    <Receiver>
+      <Name>CancelCheckoutEventReceiverItemCheckingOut</Name>
+      <Type>ItemCheckingOut</Type>
+      <SequenceNumber>10000</SequenceNumber>
+      <Url>~remoteAppUrl/Services/CancelCheckoutEventReceiver.svc</Url>
+    </Receiver>
+  </Receivers>
+</Elements>

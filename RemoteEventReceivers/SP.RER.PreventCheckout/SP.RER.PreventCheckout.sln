@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPDisallowCheckout", "SPDisallowCheckout\SPDisallowCheckout.csproj", "{1C79D0DA-D00A-4EB4-BEB6-02291EF04DDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPDisallowCheckoutWeb", "SPDisallowCheckoutWeb\SPDisallowCheckoutWeb.csproj", "{25F2D946-BF8C-4EAB-9D02-E06C09AFB7FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{165B7814-C64A-4DF3-B36E-92E24E22931C}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C79D0DA-D00A-4EB4-BEB6-02291EF04DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C79D0DA-D00A-4EB4-BEB6-02291EF04DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C79D0DA-D00A-4EB4-BEB6-02291EF04DDE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1C79D0DA-D00A-4EB4-BEB6-02291EF04DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C79D0DA-D00A-4EB4-BEB6-02291EF04DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C79D0DA-D00A-4EB4-BEB6-02291EF04DDE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{25F2D946-BF8C-4EAB-9D02-E06C09AFB7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25F2D946-BF8C-4EAB-9D02-E06C09AFB7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25F2D946-BF8C-4EAB-9D02-E06C09AFB7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25F2D946-BF8C-4EAB-9D02-E06C09AFB7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F7E0B54-74FF-48C3-AF77-5757EB13F93E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="125c9c34-0c3f-49d5-a3a4-db4f717f878d" solutionId="125c9c34-0c3f-49d5-a3a4-db4f717f878d" resetWebServer="false" sharePointProductVersion="15.0" name="SPDisallowCheckout" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="5d284060-3aa8-4134-ab18-5c453aaba680" />
+  </features>
+</package>
