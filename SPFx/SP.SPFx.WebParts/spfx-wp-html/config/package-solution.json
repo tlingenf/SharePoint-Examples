@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "spfx-wp-html-client-side-solution",
+    "id": "a74c4b40-af9f-4492-b266-013020175072",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-wp-html.sppkg"
+  }
+}
