@@ -26,22 +26,28 @@ namespace SPExamples.Rest.Netcore
 
         static async Task ExecuteSpRest()
         {
+            var spSiteUrl = configuration["SharePointSiteUrl"] as string;
+            var spDocLib = configuration["DocumentLibraryName"] as string;
+            var spSiteUri = new Uri(spSiteUrl);
+
             // SharePoint API Access Token
             Console.WriteLine("Logging in to the SharePoint API.");
             List<string> spScopes = new List<string>
             {
-                $"https://{configuration["SharePointHostName"]}/.default"
+                $"https://{spSiteUri.Host}/.default"
             };
             var spAccessToken = await InteractiveLogin(spScopes);
 
             var spclient = new SpRestClient(configuration, spAccessToken);
 
             Console.Write("GetListItemAsysnc");
-            Console.WriteLine(await spclient.GetListItemAsync("https://m365x612691.sharepoint.com/sites/ClassicSPRecords", "Documents", "3"));
+            Console.WriteLine(await spclient.GetListItemAsync(spSiteUrl, "Documents", "3"));
+
+            var newFileName = $"myfile_{RandomString(6)}.pptx";
 
             Console.WriteLine("");
             Console.Write("UploadFileAsync");
-            var uploadResponse = await spclient.UploadFileAsync("https://m365x612691.sharepoint.com/sites/ClassicSPRecords", Path.Combine(AppContext.BaseDirectory, "SP2013_LargeFile.pptx"), "/sites/ClassicSPRecords/Documents", $"myfile_{RandomString(6)}.pptx");
+            var uploadResponse = await spclient.UploadFileAsync(spSiteUrl, Path.Combine(AppContext.BaseDirectory, "SP2013_LargeFile.pptx"), $"{spSiteUri.AbsolutePath}/{spDocLib}", newFileName);
             var uploadOjbect = JObject.Parse(uploadResponse);
             Console.WriteLine(uploadResponse);
 
@@ -53,11 +59,11 @@ namespace SPExamples.Rest.Netcore
                 { "Text Field", "here is some text" },
                 { "Multi-Choice Field", "Choice 1,Choice 4" }
             };
-            var updateResponse = await spclient.SetListItemAsync("https://m365x612691.sharepoint.com/sites/ClassicSPRecords", "Documents", uploadOjbect["d"]["ID"].ToString(), values);
+            var updateResponse = await spclient.SetListItemAsync(spSiteUrl, spDocLib, uploadOjbect["d"]["ID"].ToString(), values);
             Console.WriteLine(updateResponse);
 
             Console.Write("CheckIn");
-            var checkInResponse = await spclient.CheckInFileAsync("https://m365x612691.sharepoint.com/sites/ClassicSPRecords", $"{folderId}/{filename}", "checked in using REST");
+            var checkInResponse = await spclient.CheckInFileAsync(spSiteUrl, $"{spSiteUri.AbsolutePath}/{spDocLib}/{newFileName}", "checked in using REST");
         }
 
         public static async Task<string> InteractiveLogin(IEnumerable<string> scopes)
@@ -80,6 +86,7 @@ namespace SPExamples.Rest.Netcore
             configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
                 .AddJsonFile("appsettings.json", false)
+                .AddJsonFile("appSettings.json.user", true)
                 .Build();
         }
 
