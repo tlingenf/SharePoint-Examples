@@ -18,10 +18,14 @@ namespace SPExamples.Rest.Netcore
         {
             ConfigureAppAsync(args).Wait();
 
-            ExecuteSpRest().Wait();
-
-            //Console.WriteLine("Press any key to continue ...");
-            //Console.ReadKey();
+            if (args[0].ToLower() == "-graph")
+            {
+                ExecuteGraphRest().Wait();
+            }
+            else
+            {
+                ExecuteSpRest().Wait();
+            }
         }
 
         static async Task ExecuteSpRest()
@@ -64,6 +68,30 @@ namespace SPExamples.Rest.Netcore
 
             Console.Write("CheckIn");
             var checkInResponse = await spclient.CheckInFileAsync(spSiteUrl, $"{spSiteUri.AbsolutePath}/{spDocLib}/{newFileName}", "checked in using REST");
+        }
+
+        static async Task ExecuteGraphRest()
+        {
+            var spSiteUrl = configuration["SharePointSiteUrl"] as string;
+            var spDocLib = configuration["DocumentLibraryName"] as string;
+            var spSiteUri = new Uri(spSiteUrl);
+            var newFileName = $"myfile_{RandomString(6)}.pptx";
+
+            // SharePoint API Access Token
+            Console.WriteLine("Logging in to the Graph API.");
+            List<string> spScopes = new List<string>
+            {
+                $"https://graph.microsoft.com/.default"
+            };
+            var spAccessToken = await InteractiveLogin(spScopes);
+
+            var graphclient = new GraphRestClient(configuration, spAccessToken);
+            var uploadResult = await graphclient.UploadFileAsync(
+                $"{spSiteUri.Host}:{spSiteUri.AbsolutePath}",
+                Path.Combine(AppContext.BaseDirectory, "SP2013_LargeFile.pptx"),
+                spDocLib,
+                newFileName);
+
         }
 
         public static async Task<string> InteractiveLogin(IEnumerable<string> scopes)

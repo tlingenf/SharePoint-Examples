@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SP.Rest.Files.Example": {
+      "commandName": "Project",
+      "commandLineArgs": "-Graph"
+    }
+  }
+}
