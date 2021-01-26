@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "set-favicon-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/setFavicon/SetFaviconApplicationCustomizer.js",
+          "manifest": "./src/extensions/setFavicon/SetFaviconApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SetFaviconApplicationCustomizerStrings": "lib/extensions/setFavicon/loc/{locale}.js"
+  }
+}

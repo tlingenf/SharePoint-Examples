@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="SetFavicon"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ComponentId="455fbe12-f2e9-4014-8803-0ba0ab46e866"
+        Properties="{&quot;faviconpath&quot;:&quot;../siteassets/favicon.ico&quot;}">
+    </ClientSideComponentInstance>
+</Elements>
