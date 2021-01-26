@@ -17,10 +17,6 @@ The code for this solution was isnspired by the solution from [https://github.co
 
 > Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
 
-## Prerequisites
-
-> Any special pre-requisites?
-
 ## Solution
 
 Solution|Author(s)
@@ -50,7 +46,7 @@ Version|Date|Comments
 
 ## Features
 
-To use a Favicon for your site you can deploy this solution directly to a specific site or to the entire tenant. By default, the solution will attempt to use a file called **favicon.ico** located in the **Site Assets** library of the site.
+To use a Favicon for your site you can add this solution as an app to any site. The solution will attempt to use a file called **favicon.ico** located in the **Site Assets** library of the site.
 
 ## References
 
