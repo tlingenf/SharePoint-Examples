@@ -56,5 +56,20 @@ namespace SPExamples.Rest.Netcore
             var responseContent = await response.Content.ReadAsStringAsync();
             return responseContent;
         }
+
+        public async Task<string> DownloadFileChunkAsync(string siteId, string localFilePath, string fileRelativePath)
+        {
+            HttpRequestMessage request;
+            HttpResponseMessage response = null;
+            long offset = 0L;
+            byte[] buffer = new byte[BufferSize];
+            var chunkSize = Convert.ToInt32(_configuration["UploadBufferSizeMB"]) * 1024 * 1024;
+
+            request = new HttpRequestMessage(HttpMethod.Get, $"{siteId}/_api/web/getfilebyserverrelativeurl('{fileRelativePath}')");
+            request.Headers.Range = new System.Net.Http.Headers.RangeHeaderValue(offset, chunkSize);
+            response = await this.SendAsync(request);
+
+            return "";
+        }
     }
 }

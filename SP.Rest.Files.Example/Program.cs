@@ -20,12 +20,32 @@ namespace SPExamples.Rest.Netcore
 
             if (args[0].ToLower() == "-graph")
             {
-                ExecuteGraphRest().Wait();
+                //ExecuteGraphRest().Wait();
+                DownloadFile().Wait();
             }
             else
             {
                 ExecuteSpRest().Wait();
             }
+        }
+
+        static async Task DownloadFile()
+        {
+            var spSiteUrl = configuration["SharePointSiteUrl"] as string;
+            var spDocLib = configuration["DocumentLibraryName"] as string;
+            var spSiteUri = new Uri(spSiteUrl);
+
+            // SharePoint API Access Token
+            Console.WriteLine("Logging in to the SharePoint API.");
+            List<string> spScopes = new List<string>
+            {
+                $"https://{spSiteUri.Host}/.default"
+            };
+            var spAccessToken = await InteractiveLogin(spScopes);
+
+            var spclient = new SpRestClient(configuration, spAccessToken);
+
+            await spclient.DownloadFileChunkAsync(spSiteUrl, "temp.pptx", "Shared%20Documents/SP2013_LargeFile.pptx");
         }
 
         static async Task ExecuteSpRest()

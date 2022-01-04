@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://m365x731247.sharepoint.com/teams/create-test-2/SitePages/Home.aspx",
+      "customActions": {
+        "ab4a76db-0c63-4b19-b10b-0594aff8f5b1": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "TopText": "Header in Top placeholder.",
+            "InlineFooterText": "Footer in-line with content.",
+            "StickyFooterText" : "Footer in Bottom placeholder.",
+            "ShowHeader": true,
+            "ShowInlineFooter": true,
+            "ShowStickyFooter": true
+          }
+        }
+      }
+    },
+    "customFooter": {
+      "pageUrl": "https://m365x731247.sharepoint.com/teams/create-test-2/SitePages/Home.aspx",
+      "customActions": {
+        "ab4a76db-0c63-4b19-b10b-0594aff8f5b1": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "TopText": "Header in Top placeholder.",
+            "InlineFooterText": "Footer in-line with content.",
+            "StickyFooterText" : "Footer in Bottom placeholder.",
+            "ShowHeader": true,
+            "ShowInlineFooter": true,
+            "ShowStickyFooter": true
+          }
+        }
+      }
+    }
+  }
+}
