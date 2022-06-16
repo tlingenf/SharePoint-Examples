@@ -1,0 +1,17 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.14.0",
+    "libraryName": "spfx-field-attachment-popout",
+    "libraryId": "d26b3533-9fd9-4d6c-883c-2d35d5df3491",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "spfx-field-attachment-popout",
+    "solutionShortDescription": "spfx-field-attachment-popout description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "FieldCustomizer"
+  }
+}

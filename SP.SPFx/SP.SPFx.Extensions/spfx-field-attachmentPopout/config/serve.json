@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://contoso.sharepoint.com/teams/test-site/Lists/Attachment%20Test/AllItems.aspx?loadSPFX=true&debugManifestsFile=https://localhost:4321/temp/manifests.js&fieldCustomizers=%7B%22AttachPopout%22%3A%7B%22id%22%3A%20%2240c7dbeb-5924-4dd3-8361-8bd27e671b5a%22%2C%22properties%22%3A%7B%7D%7D%7D",
+      "fieldCustomizers": {
+        "AttachPopout": {
+          "id": "40c7dbeb-5924-4dd3-8361-8bd27e671b5a",
+          "properties": {
+          }
+        }
+      }
+    },
+    "attachmentPopout": {
+      "pageUrl": "https://contoso.sharepoint.com/teams/test-site/Lists/Attachment%20Test/AllItems.aspx?loadSPFX=true&debugManifestsFile=https://localhost:4321/temp/manifests.js&fieldCustomizers=%7B%22AttachPopout%22%3A%7B%22id%22%3A%20%2240c7dbeb-5924-4dd3-8361-8bd27e671b5a%22%2C%22properties%22%3A%7B%7D%7D%7D",
+      "fieldCustomizers": {
+        "AttachPopout": {
+          "id": "40c7dbeb-5924-4dd3-8361-8bd27e671b5a",
+          "properties": {
+          }
+        }
+      }
+    }
+  }
+}

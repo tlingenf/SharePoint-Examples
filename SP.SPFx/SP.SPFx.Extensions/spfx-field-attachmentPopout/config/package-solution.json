@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "Modern Attachment Popout",
+    "id": "d26b3533-9fd9-4d6c-883c-2d35d5df3491",
+    "version": "1.0.0.5",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.14.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Displays a popout for attachment links when the attachment icon is clicked."
+      },
+      "longDescription": {
+        "default": "Displays a popout for attachment links when the attachment icon is clicked."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Modern Attachment Popout",
+        "description": "Displays a popout for attachment links when the attachment icon is clicked.",
+        "id": "8f780e7f-8ef1-4404-9b83-a48ea6a8b266",
+        "version": "1.0.0.5",
+        "assets": {
+          "elementManifests": [
+            "elements.xml"
+          ]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-field-attachment-popout.sppkg"
+  }
+}

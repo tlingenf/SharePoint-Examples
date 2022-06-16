@@ -1,0 +1,32 @@
+{
+   "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+   "debugMode": true,
+   "elmType": "div",
+   "style": {
+       "align-items": "center",
+       "border": "1px solid #000000",
+       "height": "80px",
+       "width": "80px",
+       "display": "flex",
+       "flex-direction": "column",
+       "justify-content": "center"
+   },
+   "children": [
+       {
+           "elmType": "div",
+           "style": {
+               "color": "#323130",
+               "font-size": "15px"
+           },
+           "txtContent": "=if(getMonth(Date(@currentField)) == 11,'DEC',if(getMonth(Date(@currentField)) == 10,'NOV',if(getMonth(Date(@currentField)) == 9,'OCT',if(getMonth(Date(@currentField)) == 8,'SEP',if(getMonth(Date(@currentField)) == 7,'AUG',if(getMonth(Date(@currentField)) == 6,'JUL',if(getMonth(Date(@currentField)) == 5,'JUN',if(getMonth(Date(@currentField)) == 4,'MAY',if(getMonth(Date(@currentField)) == 3,'APR',if(getMonth(Date(@currentField)) == 2,'MAR',if(getMonth(Date(@currentField)) == 1,'FEB',if(getMonth(Date(@currentField)) == 0,'JAN',''))))))))))))"
+       },
+       {
+           "elmType": "div",
+           "style": {
+                "color": "#323130",
+                "font-size": "28px"
+            },
+            "txtContent": "=getDate(Date(@currentField))"
+       }
+   ]
+}

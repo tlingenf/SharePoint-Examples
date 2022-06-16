@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Field ID="{71ea1464-46f7-4393-93c9-9ba0bb0bff14}"
+        Type="Text"
+        Name="AttachPopout"
+        DisplayName="Attachments"
+        StaticName="AttachPopout"
+        FromBaseType="TRUE"
+        ClientSideComponentId="40c7dbeb-5924-4dd3-8361-8bd27e671b5a"
+        ClientSideComponentProperties="{ }">
+    </Field>
+    <!-- <Field ID="{67df98f4-9dec-48ff-a553-29bece9c5bf4}"
+        Type="Attachments"
+        Name="Attachments"
+        DisplayName="Attachments"
+        StaticName="Attachments"
+        FromBaseType="TRUE"
+        ClientSideComponentId="40c7dbeb-5924-4dd3-8361-8bd27e671b5a"
+        ClientSideComponentProperties="{ }">
+    </Field> -->
+</Elements>

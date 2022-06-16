@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "attachment-popout-field-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/attachmentPopout/AttachmentPopoutFieldCustomizer.js",
+          "manifest": "./src/extensions/attachmentPopout/AttachmentPopoutFieldCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "AttachmentPopoutFieldCustomizerStrings": "lib/extensions/attachmentPopout/loc/{locale}.js"
+  }
+}
