@@ -2,9 +2,9 @@
 
 ## Summary
 
-Short summary on functionality and used technologies.
+This SPFx Field Customizer Extension will render a flyout showing attachment names as links when hovering over an attachment icon. A new site column will be created that is used to render this content.
 
-[picture of the solution in action, if possible]
+![Screen shot of flyout showing attachment names as links when hovering over an attachment icon.](./screenshot.png)
 
 ## Used SharePoint Framework Version
 
@@ -25,18 +25,17 @@ Short summary on functionality and used technologies.
 
 Solution|Author(s)
 --------|---------
-folder name | Author details (name, company, twitter alias with link)
+spfx-field-attachmentPopout | Travis Lingenfelder
 
 ## Version history
 
 Version|Date|Comments
 -------|----|--------
-1.1|March 10, 2021|Update comment
-1.0|January 29, 2021|Initial release
+1.0.0.5|7/5/2022|Initial release
 
 ## Disclaimer
 
-**THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
+**THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT. This sample code, scripts, and other resources are not supported under any Microsoft standard support program or service and are meant for illustrative purposes only. The sample code, scripts, and resources are provided AS IS without warranty of any kind. Microsoft further disclaims all implied warranties including, without limitation, any implied warranties of merchantability or of fitness for a particular purpose. The entire risk arising out of the use or performance of this material and documentation remains with you. In no event shall Microsoft, its authors, or anyone else involved in the creation, production, or delivery of the sample be liable for any damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or other pecuniary loss) arising out of the use of or inability to use the samples or documentation, even if Microsoft has been advised of the possibility of such damages.**
 
 ---
 
@@ -52,17 +51,16 @@ Version|Date|Comments
 
 ## Features
 
-Description of the extension that expands upon high-level summary above.
+This feature will add a new site column called Attachments (internal name: AttachPopout) that you can add to your lists to show a flyout of the attachments for the current item.
 
 This extension illustrates the following concepts:
 
-- topic 1
-- topic 2
-- topic 3
+- SharePoint Framework (SPFx) Field Customizer Extension
+- SharePoint REST web service
+- REACT Components
+- Microsoft Fluent UI
 
 > Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
-
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
 
 ## References
 

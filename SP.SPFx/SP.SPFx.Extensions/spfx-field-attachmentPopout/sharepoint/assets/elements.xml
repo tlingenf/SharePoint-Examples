@@ -9,13 +9,4 @@
         ClientSideComponentId="40c7dbeb-5924-4dd3-8361-8bd27e671b5a"
         ClientSideComponentProperties="{ }">
     </Field>
-    <!-- <Field ID="{67df98f4-9dec-48ff-a553-29bece9c5bf4}"
-        Type="Attachments"
-        Name="Attachments"
-        DisplayName="Attachments"
-        StaticName="Attachments"
-        FromBaseType="TRUE"
-        ClientSideComponentId="40c7dbeb-5924-4dd3-8361-8bd27e671b5a"
-        ClientSideComponentProperties="{ }">
-    </Field> -->
 </Elements>

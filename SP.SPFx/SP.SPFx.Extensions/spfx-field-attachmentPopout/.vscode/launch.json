@@ -5,7 +5,7 @@
       "name": "Hosted workbench",
       "type": "pwa-chrome",
       "request": "launch",
-      "url": "https://m365x731247.sharepoint.com/teams/test-site-17/Lists/test/AllItems.aspx?loadSPFX=true&debugManifestsFile=https://localhost:4321/temp/manifests.js&fieldCustomizers=%7B%22AttachPopout%22%3A%7B%22id%22%3A%20%2240c7dbeb-5924-4dd3-8361-8bd27e671b5a%22%2C%22properties%22%3A%20%7B%22sampleText%22%3A%22Value%22%7D%7D%7D",
+      "url": "https://contoso.sharepoint.com/teams/test-site/Lists/test/AllItems.aspx?loadSPFX=true&debugManifestsFile=https://localhost:4321/temp/manifests.js&fieldCustomizers=%7B%22AttachPopout%22%3A%7B%22id%22%3A%20%2240c7dbeb-5924-4dd3-8361-8bd27e671b5a%22%2C%22properties%22%3A%20%7B%22sampleText%22%3A%22Value%22%7D%7D%7D",
       "webRoot": "${workspaceRoot}",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
