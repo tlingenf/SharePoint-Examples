@@ -1,4 +1,17 @@
-# Create an App Registration with the following API Permissions
+# Overview
+
+This tool will allow anyone with permissions to the app to query for SharePoint site collection administrators without the need to have any permissions to the SharePoint site.
+
+You can lookup a SharePoint site by its title, URL, or other search properties.
+
+![Search for a site](Find_site.png)
+
+Once you select a site, it will show you a list of site collection adminstrators broken down into individual users, Azure AD group names with the owners of Azure AD groups expanded.
+
+![List administrators](Site_admins.png)
+
+# Setup Guide
+## Create an App Registration with the following API Permissions
 
 |Service|Type|Permission|
 |---|---|---|
@@ -8,7 +21,7 @@
 
 **Note:** The app uses a certificate for authentication and one must be generated and associated with the app registration.
 
-# Create the Azure Function app
+## Create the Azure Function app
 
 **Type:** PowerShell - 7.0
 
@@ -25,7 +38,7 @@ Create the following Application Settings for the function app.
 |TenantId|The id of your tenant|
 |WEBSITE_LOAD_CERTIFICATES|The thumbprint value for your certificate used.|
 
-# Deploy the Power Apps Solution
+## Deploy the Power Apps Solution
 
 Import the solution file found in the **.\Power Platform Solution** folder.
 
