@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param (
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory=$true)]
     [String]
     $SPRootSite,
 
@@ -14,12 +14,11 @@ $allowedRoles = "Read","View Only","Limited Access"
 
 Import-Module PnP.PowerShell -ErrorAction Stop
 
-
-function Set-WebReadOnly {
+function Set-SiteReadOnly {
     [CmdletBinding()]
     param (
-        [Parameter()]
-        [String]
+        [Parameter(Mandatory=$true)]
+        [string]
         $SPSiteUrl
     )
 
@@ -37,7 +36,7 @@ function Set-WebReadOnly {
 
         if ($Recursive) {
             $thisUri = [Uri]$SPSiteUrl
-            Get-PnPSubWeb -Connection $thisConnection | ForEach-Object { Set-WebReadOnly -SPSiteUrl ("{0}://{1}{2}" -f $thisUri.Scheme, $thisUri.Host, $_.ServerRelativeUrl) }
+            Get-PnPSubWeb -Connection $thisConnection | ForEach-Object { Set-SiteReadOnly -SPSiteUrl ("{0}://{1}{2}" -f $thisUri.Scheme, $thisUri.Host, $_.ServerRelativeUrl) }
         }
 
         $thisConnection = $null
@@ -205,4 +204,4 @@ function Get-RoleChangesObject
 
 
 # ### Main ###
-Set-WebReadOnly -SPSiteUrl $SPRootSite
+Set-SiteReadOnly -SPSiteUrl $SPRootSite
