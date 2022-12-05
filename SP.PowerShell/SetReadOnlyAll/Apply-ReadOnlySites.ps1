@@ -1,8 +1,8 @@
 [CmdletBinding()]
 param (
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory=$true)]
     [String]
-    $SPRootSite = "https://m365x731247.sharepoint.com/teams/test-site-28/1-C/1-C-2",
+    $SPRootSite,
 
     [Parameter()]
     [switch]
@@ -10,15 +10,12 @@ param (
 )
 
 # Constants
-$allowedRoles = "Read","View Only","Limited Access"
+$allowedRoles = "Read","View Only","Limited Access","Restricted View"
 $batchSize = 500
 
-$clientId = "4d65c5a6-f617-4da4-8c87-ffa48e967d96"
-$tenantId = "5b52477b-6502-4b3c-8c70-3e3ff25efc07"
-
 Import-Module PnP.PowerShell -ErrorAction Stop
-Import-Module MSAL.PS -ErrorAction Stop
-Add-Type -Path (Join-Path $PSScriptRoot "SPListtItemHelper.dll")
+$PSScriptRoot
+Add-Type -Path (Join-Path $PSScriptRoot "SPListtItemHelper.dll") -ErrorAction Stop
 
 function Set-SiteReadOnly {
     [CmdletBinding()]
@@ -29,7 +26,7 @@ function Set-SiteReadOnly {
     )
 
     try {
-        $thisConnection = Connect-PnPOnline -Url $SPSiteUrl -AccessToken $auth.AccessToken -ValidateConnection -ErrorAction Stop -ReturnConnection
+        $thisConnection = Connect-PnPOnline -Url $SPSiteUrl -ValidateConnection -ErrorAction Stop -ReturnConnection
     
         $web = Get-PnPWeb -Includes RoleAssignments,HasUniqueRoleAssignments -Connection $thisConnection
 
@@ -38,8 +35,8 @@ function Set-SiteReadOnly {
         Set-ClientObjectReadOnly -ClientObject $web -PnPConnection $thisConnection
 
         $lists = Get-PnPList -Includes Hidden,RoleAssignments,HasUniqueRoleAssignments -Connection $thisConnection
-        $lists 
-            | Where-Object {$_.Hidden -eq $false -and $_.HasUniqueRoleAssignments -eq $true} 
+        $lists `
+            | Where-Object {$_.Hidden -eq $false -and $_.HasUniqueRoleAssignments -eq $true} `
                 | ForEach-Object { Set-ClientObjectReadOnly -ClientObject $_ -PnPConnection $thisConnection }
 
         $lists | ForEach-Object { 
@@ -177,7 +174,7 @@ function Set-ListReadOnly
     switch ($PrincipalType) {
         SharePointGroup {
             foreach ($addRole in $PermissionsParameter["AddRole"]) {
-                Set-PnPListPermission -Identity $List -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -AddRole $addRole -Connection $PnPConnection
+                Set-PnPListPermission -Identity $List -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -AddRole $addRole -Connection $PnPConnection -sy
             }
             foreach ($removeRole in $PermissionsParameter["RemoveRole"]) {
                 Set-PnPListPermission -Identity $List -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -RemoveRole $removeRole -Connection $PnPConnection
@@ -227,21 +224,25 @@ function Set-ListItemReadOnly
     $PermissionsParameter
 
     switch ($PrincipalType) {
+
         SharePointGroup {
             foreach ($addRole in $PermissionsParameter["AddRole"]) {
-                Set-PnPListItemPermission -List $ListItem.ParentList -Identity $ListItem.Id -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -AddRole $addRole -Connection $PnPConnection
+                Set-PnPListItemPermission -List $ListItem.ParentList -Identity $ListItem.Id -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -AddRole $addRole -Connection $PnPConnection -SystemUpdate
             }
             foreach ($removeRole in $PermissionsParameter["RemoveRole"]) {
-                Set-PnPListItemPermission -List $ListItem.ParentList -Identity $ListItem.Id -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -RemoveRole $removeRole -Connection $PnPConnection
+                Set-PnPListItemPermission -List $ListItem.ParentList -Identity $ListItem.Id -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -RemoveRole $removeRole -Connection $PnPConnection -SystemUpdate
             }
+            Break
         }
+
         Default {
             foreach ($addRole in $PermissionsParameter["AddRole"]) {
-                Set-PnPListItemPermission -List $ListItem.ParentList -Identity $ListItem.Id -User (Get-PnPUser -Identity $LoginId -Connection $PnPConnection).Email -AddRole $addRole -Connection $PnPConnection
+                Set-PnPListItemPermission -List $ListItem.ParentList -Identity $ListItem.Id -User (Get-PnPUser -Identity $LoginId -Connection $PnPConnection).LoginName -AddRole $addRole -Connection $PnPConnection -SystemUpdate
             }
             foreach ($removeRole in $PermissionsParameter["RemoveRole"]) {
-                Set-PnPListItemPermission -List $ListItem.ParentList -Identity $ListItem.Id -User (Get-PnPUser -Identity $LoginId -Connection $PnPConnection).Email -RemoveRole $removeRole -Connection $PnPConnection
+                Set-PnPListItemPermission -List $ListItem.ParentList -Identity $ListItem.Id -User (Get-PnPUser -Identity $LoginId -Connection $PnPConnection).LoginName -RemoveRole $removeRole -Connection $PnPConnection -SystemUpdate
             }
+            Break
         }
     }
 }
@@ -272,7 +273,6 @@ function Get-RoleChangesObject
 
 # ### Main ###
 
-Write-Host "Please login with site collection administrator credentials."
-$auth = Get-MsalToken -ClientId $clientId -TenantId $tenantId -Scopes ("https://{0}/AllSites.FullControl" -f ([Uri]$SPRootSite).Host) -RedirectUri "https://login.microsoftonline.com/common/oauth2/nativeclient" -Interactive
+Write-Host "Please login with site collection administrator credentials when prompted."
 
 Set-SiteReadOnly -SPSiteUrl $SPRootSite
