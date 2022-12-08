@@ -31,7 +31,7 @@ $batchSize = 500
 
 Import-Module PnP.PowerShell -ErrorAction Stop
 
-#Add-Type -Path (Join-Path $PSScriptRoot "SPListtItemHelper.dll") -ErrorAction Stop
+# Use C# CSOM code in order to get list items with the HasUniqueRoleAssignments loaded for better throttling support.
 [System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SharePoint.Client") | Out-Null
 [System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SharePoint.Client.Runtime") | Out-Null
 Add-Type `
