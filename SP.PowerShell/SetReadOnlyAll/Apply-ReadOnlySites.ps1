@@ -14,8 +14,50 @@ $allowedRoles = "Read","View Only","Limited Access","Restricted View"
 $batchSize = 500
 
 Import-Module PnP.PowerShell -ErrorAction Stop
-$PSScriptRoot
-Add-Type -Path (Join-Path $PSScriptRoot "SPListtItemHelper.dll") -ErrorAction Stop
+
+#Add-Type -Path (Join-Path $PSScriptRoot "SPListtItemHelper.dll") -ErrorAction Stop
+[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SharePoint.Client") | Out-Null
+[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SharePoint.Client.Runtime") | Out-Null
+Add-Type `
+    -ReferencedAssemblies (
+        "Microsoft.SharePoint.Client", "Microsoft.SharePoint.Client.Runtime", "System.Linq", "System.Collections", "netstandard", "System.Linq.Expressions"
+    ) `
+    -TypeDefinition @"
+    using System;
+    using Microsoft.SharePoint.Client;
+    using System.Linq;
+    
+    namespace SP.Powershell.Helper
+    {
+        public static class SPPSHelper
+        {
+            public static System.Collections.Generic.List<ListItem> GetListItems(Microsoft.SharePoint.Client.List list, int batchSize)
+            {
+                System.Collections.Generic.List<ListItem> returnListItems = new System.Collections.Generic.List<ListItem>();
+    
+                var query = new Microsoft.SharePoint.Client.CamlQuery();
+                query.ViewXml = string.Format("<View Scope='RecursiveAll'><RowLimit>{0}(</RowLimit></View>", batchSize);
+    
+                do
+                {
+                    var batchListItems = list.GetItems(query);
+                    list.Context.Load(batchListItems, i => i.Include(
+                        item => item.HasUniqueRoleAssignments, 
+                        item => item.Id),
+                        items => items.ListItemCollectionPosition
+                    );
+                    list.Context.ExecuteQuery();
+                    returnListItems.AddRange(batchListItems.Where(item => item.HasUniqueRoleAssignments));
+                    query.ListItemCollectionPosition = batchListItems.ListItemCollectionPosition;
+                } while (query.ListItemCollectionPosition != null);
+    
+                return returnListItems;
+            }
+        }
+    }    
+"@ -ErrorAction Stop
+
+
 
 function Set-SiteReadOnly {
     [CmdletBinding()]
