@@ -2,6 +2,8 @@
 
 This solution will change all permissions to read only. The script will start at the site level and change all site permissions to Read. If the site is inheriting permissions from its parent site, it will break permission inheritance and set the new site permissions to Read. It will then find any lists (excluding hidden lists) and set any list and list item permissions to Read.
 
+The script will automatically create a transcript of all of the permission changes in the same folder as the script.
+
 ## Disclaimer
 This sample code, scripts, and other resources are not supported under any Microsoft standard support program or service and are meant for illustrative purposes only.
 
