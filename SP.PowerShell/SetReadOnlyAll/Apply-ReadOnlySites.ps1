@@ -84,7 +84,7 @@ function Set-SiteReadOnly {
     )
 
     try {
-        $thisConnection = Connect-PnPOnline -Url $SPSiteUrl -ValidateConnection -ErrorAction Stop -ReturnConnection
+        $thisConnection = Connect-PnPOnline -Url $SPSiteUrl -ValidateConnection -ErrorAction Stop -ReturnConnection -UseWebLogin
     
         $web = Get-PnPWeb -Includes RoleAssignments,HasUniqueRoleAssignments -Connection $thisConnection
 
@@ -331,6 +331,14 @@ function Get-RoleChangesObject
 
 # ### Main ###
 
-Write-Host "Please login with site collection administrator credentials when prompted."
+try {
 
-Set-SiteReadOnly -SPSiteUrl $SPRootSite
+    Start-Transcript -OutputDirectory $PSScriptRoot -UseMinimalHeader
+
+    Write-Host "Please login with site collection administrator credentials when prompted."
+
+    Set-SiteReadOnly -SPSiteUrl $SPRootSite
+}
+finally {
+    Stop-Transcript
+}

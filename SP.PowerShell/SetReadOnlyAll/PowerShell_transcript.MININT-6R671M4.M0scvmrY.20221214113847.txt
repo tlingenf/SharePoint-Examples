@@ -1,0 +1,36 @@
+**********************
+PowerShell transcript start
+Start time: 20221214113847
+**********************
+Transcript started, output file is C:\Users\trlingen\Code\public\SharePoint\SP.PowerShell\SetReadOnlyAll\PowerShell_transcript.MININT-6R671M4.M0scvmrY.20221214113847.txt
+Please login with site collection administrator credentials when prompted.
+PS C:\Users\trlingen\Code\public\SharePoint\SP.PowerShell\SetReadOnlyAll> TerminatingError(Connect-PnPOnline): "AADSTS50126: Error validating credentials due to invalid username or password.
+Trace ID: a8a3d148-41e5-4029-94d7-101d03201d00
+Correlation ID: ffe20c09-90ea-4ded-aa68-0c5050a9b847
+Timestamp: 2022-12-14 17:38:47Z"
+
+Write-Error: C:\Users\trlingen\Code\public\SharePoint\SP.PowerShell\SetReadOnlyAll\Apply-ReadOnlySites.ps1:340:5
+Line |
+ 340 |      Set-SiteReadOnly -SPSiteUrl $SPRootSite
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | An error occurred while processing site https://m365x731247.sharepoint.com/teams/test-site-28
+
+Write-Error: C:\Users\trlingen\Code\public\SharePoint\SP.PowerShell\SetReadOnlyAll\Apply-ReadOnlySites.ps1:340:5
+Line |
+ 340 |      Set-SiteReadOnly -SPSiteUrl $SPRootSite
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | An error occurred while processing site https://m365x731247.sharepoint.com/teams/test-site-28
+
+
+Connect-PnPOnline: C:\Users\trlingen\Code\public\SharePoint\SP.PowerShell\SetReadOnlyAll\Apply-ReadOnlySites.ps1:87:27
+Line |
+  87 |  … onnection = Connect-PnPOnline -Url $SPSiteUrl -ValidateConnection -Er …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | AADSTS50126: Error validating credentials due to invalid username or password. Trace ID: a8a3d148-41e5-4029-94d7-101d03201d00 Correlation ID: ffe20c09-90ea-4ded-aa68-0c5050a9b847
+     | Timestamp: 2022-12-14 17:38:47Z
+
+>> TerminatingError(): "System error."
+**********************
+PowerShell transcript end
+End time: 20221214113848
+**********************
