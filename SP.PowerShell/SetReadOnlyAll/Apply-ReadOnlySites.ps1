@@ -232,7 +232,7 @@ function Set-ListReadOnly
     switch ($PrincipalType) {
         SharePointGroup {
             foreach ($addRole in $PermissionsParameter["AddRole"]) {
-                Set-PnPListPermission -Identity $List -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -AddRole $addRole -Connection $PnPConnection -sy
+                Set-PnPListPermission -Identity $List -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -AddRole $addRole -Connection $PnPConnection
             }
             foreach ($removeRole in $PermissionsParameter["RemoveRole"]) {
                 Set-PnPListPermission -Identity $List -Group (Get-PnPGroup -Identity $LoginId -Connection $PnPConnection) -RemoveRole $removeRole -Connection $PnPConnection
