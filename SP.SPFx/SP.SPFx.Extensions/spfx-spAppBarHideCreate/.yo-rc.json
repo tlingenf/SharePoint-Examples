@@ -1,0 +1,22 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "16.20.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.9.1"
+    },
+    "version": "1.17.1",
+    "libraryName": "spfx-sp-app-bar-hide-create",
+    "libraryId": "3df0d29e-74b3-4d2d-83ff-16718c5be33a",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "spfx-sp-app-bar-hide-create",
+    "solutionShortDescription": "spfx-sp-app-bar-hide-create description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "ApplicationCustomizer"
+  }
+}

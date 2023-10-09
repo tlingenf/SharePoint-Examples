@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Hosted workbench",
+      "type": "edge",
+      "request": "launch",
+      "url": "https://m365x29588817.sharepoint.com/sites/MalwareTestSite?loadSPFX=true&debugManifestsFile=https://localhost:4321/temp/manifests.js&customActions={\"a50555e5-1482-45f8-9fb5-69c9a5fe72a7\": {\"location\": \"ClientSideExtension.ApplicationCustomizer\",\"properties\": {}}}",
+      "webRoot": "${workspaceRoot}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///.././src/*": "${webRoot}/src/*",
+        "webpack:///../../../src/*": "${webRoot}/src/*",
+        "webpack:///../../../../src/*": "${webRoot}/src/*",
+        "webpack:///../../../../../src/*": "${webRoot}/src/*"
+      },
+      "runtimeArgs": [
+        "--remote-debugging-port=9222",
+        "--incognito"
+      ]
+    }
+  ]
+}

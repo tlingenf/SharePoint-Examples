@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="AppBarHideCreate"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ComponentId="a50555e5-1482-45f8-9fb5-69c9a5fe72a7"
+        Properties="">
+    </ClientSideComponentInstance>
+</Elements>

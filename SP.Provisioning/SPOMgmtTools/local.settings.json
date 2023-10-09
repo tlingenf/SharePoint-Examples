@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME_VERSION": "7.2",
+    "FUNCTIONS_WORKER_RUNTIME": "powershell",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=trlingenspmgmtstor;AccountKey=KZJwx7DLqLp14JAHjjkNC9a0HfYERi2WXGZSaQeYWbLB1rQf8N7Cu9jtJLppedv55d9Wdqn8jyX1+ASt0CJHIg==;EndpointSuffix=core.windows.net",
+    "ClientId": "c247cd4a-6e82-4a42-8d79-e59c9c4722a9",
+    "TenantDomain": "trlingen.onmicrosoft.com"
+  }
+}
