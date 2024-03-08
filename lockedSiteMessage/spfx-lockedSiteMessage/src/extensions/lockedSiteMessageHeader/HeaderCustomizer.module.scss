@@ -1,0 +1,18 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.app {
+  .top {
+      height:60px;
+      text-align:center;
+      line-height:1.5;
+      font-weight:bold;
+      align-items: center;
+      justify-content: center;
+      background-color: $ms-color-themePrimary;
+      color: $ms-color-white;
+
+      a {
+          color: $ms-color-themeLighter;
+      }
+  }
+}

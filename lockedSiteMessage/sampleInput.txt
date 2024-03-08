@@ -1,0 +1,3 @@
+https://tenant.sharepoint.com/sites/site01
+https://tenant.sharepoint.com/sites/site02
+https://tenant.sharepoint.com/sites/site03

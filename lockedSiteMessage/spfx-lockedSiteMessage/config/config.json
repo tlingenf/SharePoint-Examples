@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "locked-site-message-header-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/lockedSiteMessageHeader/LockedSiteMessageHeaderApplicationCustomizer.js",
+          "manifest": "./src/extensions/lockedSiteMessageHeader/LockedSiteMessageHeaderApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "LockedSiteMessageHeaderApplicationCustomizerStrings": "lib/extensions/lockedSiteMessageHeader/loc/{locale}.js"
+  }
+}

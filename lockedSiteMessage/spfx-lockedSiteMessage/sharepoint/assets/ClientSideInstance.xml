@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="LockedSiteMessageHeader"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ComponentId="379b3684-e3fc-4a6c-b18b-1df6fea9367b"
+        Properties="{&quot;Message&quot;:&quot;This site has been &lt;strong&gt;locked&lt;/strong&gt; by your administrator.&lt;br/&gt;&lt;a href=&#39;mailto:support@mycompany,com&#39;&gt;Contact support&lt;/a&gt; for more information.&quot;}">
+    </ClientSideComponentInstance>
+</Elements>
