@@ -4,7 +4,7 @@
 
 This solution is used to place a header on the top of modern SharePoint pages for sites that are locked ReadOnly.
 
-![Image displaying the message in a site.](assets\solution-preview.png)
+![Image displaying the message in a site.](./assets/solution-preview.png)
 
 ## Used SharePoint Framework Version
 
@@ -50,7 +50,7 @@ This solution is used to place a header on the top of modern SharePoint pages fo
 - On the Manage Apps page, select the **Upload** button.
 - Select the *spfx-lockedSiteMessage\sharepoint\solution\locked-ste-message.sppkg* file.
 - Enable the app by clicking **Only enable this app**.
-  ![Click Only enable this app](.\assets\enable-app.png)
+  ![Click Only enable this app](./assets/enable-app.png)
 - Execute the PowerShell script to deploy a batch of sites as listed in a text file.
 
   `Deploy-LockedSite.ps1 -inputPath .\sampleInput.txt`
