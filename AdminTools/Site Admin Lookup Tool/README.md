@@ -25,7 +25,7 @@ Once you select a site, it will show you a list of site collection adminstrators
 
 **Type:** PowerShell - 7.0
 
-Use Visual Studio Code with the Azure Functions extension to publish to the Function App. The Function App project can be found in the .**\SPOMgmtTools-Function** folder.
+Use Visual Studio Code with the Azure Functions extension to publish to the Function App. The Function App project can be found in the folder **[\SharePoint/Provisioning/spo-mgmt-func](https://github.com/tlingenf/SharePoint-Examples/tree/master/SP.Provisioning/spo-mgmt-func)**.
 
 Upload the *.PFX* certificate file to the Azure Function to **TLS/SSL settings** -> **Private Key Certificates (.pfx)**
 
